@@ -8,11 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/colorbox.css">
 
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="//js.leapmotion.com/0.2.0/leap.min.js"></script>
         <script src="//jqueryleapmotion.s3.amazonaws.com/jquery.leapmotion.min.js"></script>
+        <script src="js/jquery.colorbox-min.js"></script>
         
         <script>
         $(document).ready(function() {
@@ -21,7 +23,14 @@
 				console.log(gesture);
 			});
 		});
+		
+		
+		$(window).bind('swipestop', function(e, gesture){
+    		jQuery("body:first").animate({scrollTop: 0}, 500);
+  		});
 		</script>
+    
+    
     
     </head>
     <body>
@@ -38,7 +47,7 @@
 			<div class="cmpr_listing leap-interactive">
 				<div class="productphoto">
 					<a href="products/product1.html">
-						<img class="productimage" src="img/product1.png" width="165" height="165" alt="Product 1">
+						<img class="productimage" src="img/product1.png" width="165" height="165" alt="Product 1" onmouseover='jQuery.colorbox({href:"products/product1.html"}); return false;'>
 					</a>
 				</div>
 				<div class="productdescription">
@@ -57,7 +66,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0001')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -85,7 +94,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0002')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -113,7 +122,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0003')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -141,7 +150,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0004')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -171,7 +180,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0005')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -199,7 +208,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0006')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -227,7 +236,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0007')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -255,7 +264,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0008')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -285,7 +294,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0009')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -313,7 +322,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0010')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -341,7 +350,7 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0011')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
@@ -369,20 +378,129 @@
 					<ul class="addtocart">
 						<li>
 							<a href="javascript:addToCart('0012')">
-								<img src="img/but_addtocart.gif" onmouseover="this.src='img/but_addtocart_H.gif';" onmouseout="this.src='img/but_addtocart.gif';">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cmpr_listing leap-interactive">
+				<div class="productphoto">
+					<a href="products/product13.html">
+						<img class="productimage" src="img/product13.png" width="165" height="165" alt="Product 13">
+					</a>
+				</div>
+				<div class="productdescription">
+					<div class="producttitle">
+						<a href="products/product13.html">
+							"Product 13 Title - Description"
+						</a>
+					</div>
+					<div class="productextra">
+						<ul><li>SKU:</li><li>0013</li></ul>
+						<ul><li>In Stock:</li><li>Y</li></ul>
+					</div>
+				</div>
+				<div class="productprice">
+					<ul class="price"><li>Price:</li><li>$ 33.99</li></ul>
+					<ul class="addtocart">
+						<li>
+							<a href="javascript:addToCart('0013')">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cmpr_listing leap-interactive">
+				<div class="productphoto">
+					<a href="products/product14.html">
+						<img class="productimage" src="img/product14.png" width="165" height="165" alt="Product 14">
+					</a>
+				</div>
+				<div class="productdescription">
+					<div class="producttitle">
+						<a href="products/product14.html">
+							"Product 14 Title - Description"
+						</a>
+					</div>
+					<div class="productextra">
+						<ul><li>SKU:</li><li>0014</li></ul>
+						<ul><li>In Stock:</li><li>Y</li></ul>
+					</div>
+				</div>
+				<div class="productprice">
+					<ul class="price"><li>Price:</li><li>$ 34.99</li></ul>
+					<ul class="addtocart">
+						<li>
+							<a href="javascript:addToCart('0014')">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cmpr_listing leap-interactive">
+				<div class="productphoto">
+					<a href="products/product15.html">
+						<img class="productimage" src="img/product15.png" width="165" height="165" alt="Product 15">
+					</a>
+				</div>
+				<div class="productdescription">
+					<div class="producttitle">
+						<a href="products/product15.html">
+							"Product 15 Title - Description"
+						</a>
+					</div>
+					<div class="productextra">
+						<ul><li>SKU:</li><li>0015</li></ul>
+						<ul><li>In Stock:</li><li>Y</li></ul>
+					</div>
+				</div>
+				<div class="productprice">
+					<ul class="price"><li>Price:</li><li>$ 35.99</li></ul>
+					<ul class="addtocart">
+						<li>
+							<a href="javascript:addToCart('0015')">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="cmpr_listing leap-interactive">
+				<div class="productphoto">
+					<a href="products/product16.html">
+						<img class="productimage" src="img/product16.png" width="165" height="165" alt="Product 16">
+					</a>
+				</div>
+				<div class="productdescription">
+					<div class="producttitle">
+						<a href="products/product16.html">
+							"Product 16 Title - Description"
+						</a>
+					</div>
+					<div class="productextra">
+						<ul><li>SKU:</li><li>0016</li></ul>
+						<ul><li>In Stock:</li><li>Y</li></ul>
+					</div>
+				</div>
+				<div class="productprice">
+					<ul class="price"><li>Price:</li><li>$ 36.99</li></ul>
+					<ul class="addtocart">
+						<li>
+							<a href="javascript:addToCart('0016')">
+								<img src="img/but_addtocart.png" width="130" onmouseover="this.src='img/but_addtocart_H.png';" onmouseout="this.src='img/but_addtocart.png';">
 							</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			</div>
+			</div>
 		</div>
 		</div>
 		</div>
-		</div>
-		
-		<!-- Init Leap, Set all "a" interactive, use 1 Leap cursor/finger -->
-		<script>LeapManager.init({interactiveSelector:"a",maxCursors:1});</script>
 
     </body>
 </html>
