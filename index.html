@@ -1,49 +1,151 @@
 <!DOCTYPE html>
 <html class="LeapMotion">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>E-Commerce Store Template</title>
-        <meta name="description" content="Used as a boiler-plate for Leap Motion">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>E-Commerce Store Template</title>
+		<meta name="description" content="Used as a boiler-plate for Leap Motion">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/colorbox.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/colorbox.css">
+		<link rel="stylesheet" href="//wilkesalex.github.io/leapstrap/dist/css/leapstrap.css" />
 
-		
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script src="//js.leapmotion.com/0.2.0/leap.min.js"></script>
-        <script src="//jqueryleapmotion.s3.amazonaws.com/jquery.leapmotion.min.js"></script>
-        <script src="js/jquery.colorbox-min.js"></script>
-        
-        <script>
-        $(document).ready(function() {
-		$.leapmotion();
-			$(window).bind('swipe', function(e, gesture){
-				console.log(gesture);
-			});
+		<style>
+			#connStatus {
+				background-color: #666;
+				height: 50px;
+				width: 50px;
+				position: fixed;
+				top: 0px;
+				right: 0px;
+			}
+			#handStatus {
+				background-color: #666;
+				height: 50px;
+				width: 50px;
+				position: fixed;
+				top: 100px;
+				right: 0px;
+			}
+				#handStatus .left {
+					height: 50px;
+					width: 25px;
+					position: absolute;
+					top: 0px;
+					left: 0px;
+				}
+				#handStatus .right {
+					height: 50px;
+					width: 25px;
+					position: absolute;
+					top: 0px;
+					right: 0px;
+				}
+			#inFocus {
+				background-color: #666;
+				height: 50px;
+				width: 50px;
+				position: fixed;
+				top: 50px;
+				right: 0px;
+			}
+		</style>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+		<script src="js/leap-0.4.1.min.js"></script>
+		<script src="//wilkesalex.github.io/leapstrap/dist/js/leapstrap.js"></script>
+		<script src="js/jquery.leapmotion.min.js"></script>
+		<script src="js/jquery.colorbox-min.js"></script>
+
+		<script>
+		$(document).ready(function(){
+			$.leapmotion();
+			inFocus(true);
 		});
-		
-		
-		$(window).bind('swipestop', function(e, gesture){
-    		jQuery("body:first").animate({scrollTop: 0}, 500);
-  		});
+		$(window).bind('connect', function(e){connected();});
+		$(window).bind('deviceConnected', function(e){connected();});
+		$(window).bind('deviceDisconnected', function(e){disconnected();});
+		$(window).bind('focus', function(e){
+			inFocus(true);
+		});
+		$(window).bind('blur', function(e){
+			inFocus(false);
+		});
+		$(window).bind('hands', function(e, frame){
+			// overlays.hands
+			handsEntered(frame.hands)
+		});
+		$(window).bind('handsout', function(e, frame){
+			// overlays.hands
+			handsOut();
+		});
+		$(window).bind('circle', function(e, gesture){
+			// overlays.hands
+			console.log("You drew a circle with something.");
+		});
+		$(window).bind('screentap', function(e, gesture){
+			// overlays.hands
+			console.log("Knock, Knock");
+		});
+		$(window).bind('keytap', function(e, gesture){
+			// overlays.hands
+			console.log("keytap?, are you typing?");
+		});
+
+		var connected = function() {
+			$('#connStatus').css("background-color","green");
+			console.log("Leap Motion: Connected");
+		}
+		var disconnected = function() {
+			$('#connStatus').css("background-color","red");
+			console.log("Leap Motion: Disconnected");
+		}
+		var handsEntered = function(hands) {
+			if (hands.length > 1) {
+				$('#handStatus .left').css("background-color","green");
+				$('#handStatus .right').css("background-color","green");
+			} else {
+				if (hands[0].palmPosition[0]>0) {
+					$('#handStatus .left').css("background-color","red");
+					$('#handStatus .right').css("background-color","green");
+				} else {
+					$('#handStatus .left').css("background-color","green");
+					$('#handStatus .right').css("background-color","red");
+				}
+			}
+			return hands.length;
+		}
+		var handsOut = function() {
+			$('#handStatus .left').css("background-color","red");
+			$('#handStatus .right').css("background-color","red");
+		}
+		var rotate = function() {
+
+		}
+		var inFocus = function(bool) {
+			if (bool) {
+				$('#inFocus').css("background-color","green");
+			} else {
+				$('#inFocus').css("background-color","red");
+			}
+		}
 		</script>
-    
-    
-    
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browsersupport"> Your Browser is not supported. Get <a href="//www.google.com/chrome">Google Chrome</a></p>
-        <![endif]-->
-        <div id="container">
-        <div class="left_nav"></div>
-        <div id="content" class="content">
+	
+	
+	
+	</head>
+	<body>
+		<!--[if lt IE 8]>
+			<p class="browsersupport"> Your Browser is not supported. Get <a href="//www.google.com/chrome">Google Chrome</a></p>
+		<![endif]-->
+		<div id="container">
+		<div class="left_nav"></div>
+		<div id="content" class="content">
 		<div class="productview">
 		<div class="toolbar"></div>
-        <div class="cmpr_gridwall">
-        	<div class="productrow">
+		<div class="cmpr_gridwall">
+			<div class="productrow">
 			<div class="cmpr_listing leap-interactive">
 				<div class="productphoto">
 					<a href="products/product1.html">
@@ -502,5 +604,16 @@
 		</div>
 		</div>
 
-    </body>
+
+		<div id="connStatus">Conn</div>
+		<div id="inFocus">Focus</div>
+		<div id="handStatus">
+			<div class="left">L</div>
+			<div class="right">R</div>
+		</div>
+		<canvas>
+			
+		</canvas>
+
+	</body>
 </html>
