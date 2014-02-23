@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://carvisualizer.plus360degrees.com/threejs/ -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>+360º - Car Visualizer - Three.js</title>
+    <meta charset="utf-8">
+    <meta property="og:image" content="http://www.plus360degrees.com/jpgs/shareImageCarVisualizer.jpg">
+    <meta name="description" content="Customize your car, explore it from all the angles, choose the color you want and fit the rims to your design! You can choose from the models we already did or suggest us what you would like to see and we will make it for you! Made by Plus360Degrees. This project is not for commercial purposes.">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="http://www.plus360degrees.com/jpgs/plus.ico">
+    <link href="./files/car.css" rel="stylesheet" type="text/css">
+    <link href="./files/css" rel="stylesheet" type="text/css">
+    <script src="js/leap-0.4.1.min.js"></script>
+    <script src="js/underscore.1.6.0.min.js"></script>
+    <script type="text/javascript" src="./files/Detector.js"></script>
+    <script type="text/javascript" src="./files/RequestAnimationFrame.js"></script>
+    <script type="text/javascript" src="./files/Stats.js"></script>
+    <script type="text/javascript" src="./files/three.min.js"></script>
+    <script type="text/javascript" src="./files/CarVisualizer.min.js"></script>
+    <script>
+        selectCamera('free');
+
+        reset = {
+            all: function() {
+                leftHand = null;
+                rotationOriginal = null;
+            },
+            fists: function() {
+                leftHand = null;
+                rotationOriginal = null;
+            }
+        };
+
+        var rotationOriginal;
+        var leftHand;
+        var controller = new Leap.Controller({enableGestures: true});
+        controller.on('frame', function(currentFrame){
+            if (currentFrame.id%10 === 0) {
+                getLeftHand(currentFrame.hands)
+                getRightHand(currentFrame.hands)
+                // if (currentFrame.hands.length > 1 && !hasFingers(currentFrame.hands, currentFrame.pointables)) {
+                //     console.log(leftHand)
+                //     if (leftHand) {
+                //         console.log(leftHand.id, leftHand.x);
+                //     } else {
+                //         leftHand = getLeftHand(currentFrame.hands)
+                //         console.log(leftHand.id, leftHand.x);
+                //     }
+                //     // console.log(currentFrame.hand())
+                //     // rotate(, right, rotationOriginal)
+                // }
+                // if (currentFrame.hands.length >= 1 && hasFingers(currentFrame.hands, currentFrame.pointables)) {
+                //     reset.fists();
+                // }
+                // if (currentFrame.hands.length < 2) {
+                //     reset.fists();
+                // }
+                // if (currentFrame.hands.length < 1) {
+                //     reset.all();
+                // }
+            }
+        });
+        controller.connect();
+
+        Leap.loop();
+
+        function hasFingers(hands, pointables) {
+            var pointablesPassed = [];
+            if (hands.length < 2 && pointables.length >= 3) {
+                pointablesPassed.push(true);
+            } else if (pointables.length >= 6) {
+                pointablesPassed.push(true);
+            } else {
+                pointablesPassed.push(false);
+            }
+            // for (var i = 0; i < pointables.length; i++) {
+            //     if (pointables[i]) {
+            //         pointablesPassed.push(pointables[i].length > 35?true:false);
+            //     } else {
+            //         pointablesPassed.push(false);
+            //     }
+            // };
+            return _.all(pointablesPassed);
+        }
+
+        function getLeftHand(hands) {
+            var handsArr = []
+            for (var i = 0; i < hands.length; i++) {
+                var hand_e = {}
+                hand_e.id = hands[i].id;
+                hand_e.x = hands[i].palmPosition[0];
+                handsArr.push(hand_e)
+            };
+            var sortedHands = _.sortBy(handsArr, function(hand){
+                return hand.x;
+            });
+            return sortedHands[0];
+        }
+
+        function getRightHand(hands) {
+            var handsArr = []
+            for (var i = 0; i < hands.length; i++) {
+                var hand_e = {}
+                hand_e.id = hands[i].id;
+                hand_e.x = hands[i].palmPosition[0];
+                handsArr.push(hand_e)
+            };
+            if (handsArr.length > 2) return 'too many hands';
+            var sortedHands = _.sortBy(handsArr, function(hand){
+                return hand.x;
+            });
+            return _.last(sortedHands);
+        }
+
+        function rotate(left, right, original) {
+            if (original) {
+
+            } else {
+                rotationOriginal
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <div id="tool-bar">
+        <div id="select-car">
+            <ul id="nav">
+                <li class="top"><a>SELECT CAR MODEL</a>
+                    <ul class="car">
+                        <li><a onmouseup="replaceCarByIndex(7)">ASTON MARTIN VANTAGE V8</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(5)">MERCEDES SLR500</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(6)">NISSAN 350Z</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(4)">CHEVROLET CAMARO</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(3)">MAZDA3</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(2)">AUDI S3</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(1)">MITSUBISHI LANCER EVO</a>
+                        </li>
+                        <li><a onmouseup="replaceCarByIndex(0)">FERRARI CALIFORNIA</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="top"><a>SELECT CAR COLOR</a>
+                    <ul class="color">
+                        <canvas id="body-picker-canvas" width="264" height="86"></canvas>
+                    </ul>
+                </li>
+                <li class="top"><a>SELECT RIMS COLOR</a>
+                    <ul class="color">
+                        <canvas id="rims-picker-canvas" width="264" height="86"></canvas>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <canvas width="1119" height="0" style="width: 1119px; height: 0px;"></canvas>
+        <div style="cursor: pointer; width: 80px; opacity: 0.9; z-index: 10001; position: absolute; top: 40px; left: 10px; visibility: hidden;">
+            <div style="background-color: rgb(8, 8, 24); padding: 2px 0px 3px;">
+                <div style="font-family: Helvetica, Arial, sans-serif; text-align: left; font-size: 9px; color: rgb(0, 255, 255); margin: 0px 0px 1px 3px;">
+                    <span style="font-weight:bold">FPS</span>
+                </div>
+                <canvas width="74" height="30" style="display: block; margin-left: 3px;"></canvas>
+            </div>
+            <div style="background-color: rgb(8, 24, 8); padding: 2px 0px 3px; display: none;">
+                <div style="font-family: Helvetica, Arial, sans-serif; text-align: left; font-size: 9px; color: rgb(0, 255, 0); margin: 0px 0px 1px 3px;">
+                    <span style="font-weight:bold">MS</span>
+                </div>
+                <canvas width="74" height="30" style="display: block; margin-left: 3px;"></canvas>
+            </div>
+            <div style="background-color: rgb(24, 8, 13); padding: 2px 0px 3px; display: none;">
+                <div style="font-family: Helvetica, Arial, sans-serif; text-align: left; font-size: 9px; color: rgb(255, 0, 128); margin: 0px 0px 1px 3px;">
+                    <span style="font-weight:bold">MEM</span>
+                </div>
+                <canvas width="74" height="30" style="display: block; margin-left: 3px;"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
