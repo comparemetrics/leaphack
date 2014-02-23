@@ -12,61 +12,81 @@
     <link rel="shortcut icon" href="http://www.plus360degrees.com/jpgs/plus.ico">
     <link href="./files/car.css" rel="stylesheet" type="text/css">
     <link href="./files/css" rel="stylesheet" type="text/css">
+    <style>
+        #info {
+            background-color: rgba(0,0,0,0.6);
+            width: 200px;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            text-align: left;
+        }
+    </style>
     <script src="js/leap-0.4.1.min.js"></script>
     <script src="js/underscore.1.6.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
     <script type="text/javascript" src="./files/Detector.js"></script>
     <script type="text/javascript" src="./files/RequestAnimationFrame.js"></script>
     <script type="text/javascript" src="./files/Stats.js"></script>
     <script type="text/javascript" src="./files/three.min.js"></script>
     <script type="text/javascript" src="./files/CarVisualizer.min.js"></script>
     <script>
-        selectCamera('free');
 
         reset = {
             all: function() {
-                leftHand = null;
                 rotationOriginal = null;
             },
             fists: function() {
-                leftHand = null;
                 rotationOriginal = null;
             }
         };
 
+        leapStats = {
+            log: function(area, msg) {
+                $('#info .'+area).text(msg);
+            }
+        }
         var rotationOriginal;
-        var leftHand;
+        var offset = 269.9;
         var controller = new Leap.Controller({enableGestures: true});
         controller.on('frame', function(currentFrame){
-            if (currentFrame.id%10 === 0) {
-                getLeftHand(currentFrame.hands)
-                getRightHand(currentFrame.hands)
-                // if (currentFrame.hands.length > 1 && !hasFingers(currentFrame.hands, currentFrame.pointables)) {
-                //     console.log(leftHand)
-                //     if (leftHand) {
-                //         console.log(leftHand.id, leftHand.x);
-                //     } else {
-                //         leftHand = getLeftHand(currentFrame.hands)
-                //         console.log(leftHand.id, leftHand.x);
-                //     }
-                //     // console.log(currentFrame.hand())
-                //     // rotate(, right, rotationOriginal)
-                // }
-                // if (currentFrame.hands.length >= 1 && hasFingers(currentFrame.hands, currentFrame.pointables)) {
-                //     reset.fists();
-                // }
-                // if (currentFrame.hands.length < 2) {
-                //     reset.fists();
-                // }
-                // if (currentFrame.hands.length < 1) {
-                //     reset.all();
-                // }
+            if (currentFrame.id%20 === 0) {
+                if (currentFrame.hands.length > 1 && !hasFingers(currentFrame)) {
+                    leftHand = getLeftHand(currentFrame.hands);
+                    rightHand = getRightHand(currentFrame.hands);
+                    angleStart = cam_y;
+                    angle = getAngle(rightHand.x,rightHand.z);
+                    if (_.isUndefined(rotationOriginal)) {
+                        rotationOriginal = getLeftHand(currentFrame.hands);
+                    }
+
+
+                    leapStats.log('center', 'center: '+findCenter(leftHand, rightHand));
+                    leapStats.log('left','id: '+leftHand.id+' x:'+leftHand.x+' y:'+leftHand.y+' z:'+leftHand.z);
+                    leapStats.log('right','id: '+rightHand.id+' x:'+rightHand.x+' y:'+rightHand.y+' z:'+leftHand.z);
+                    leapStats.log('cam','cam: '+cam_y);
+                    
+                    rotate(angle);
+                }
+                if (currentFrame.hands.length = 2 && hasFingers(currentFrame)) {
+                    offset = cam_y;
+                }
+                if (currentFrame.hands.length >= 1 && hasFingers(currentFrame)) {
+                    reset.fists();
+                }
+                if (currentFrame.hands.length < 2) {
+                    reset.fists();
+                }
+                if (currentFrame.hands.length < 1) {
+                    reset.all();
+                }
             }
         });
         controller.connect();
 
-        Leap.loop();
-
-        function hasFingers(hands, pointables) {
+        function hasFingers(frame) {
+            var hands = frame.hands;
+            var pointables = frame.pointables;
             var pointablesPassed = [];
             if (hands.length < 2 && pointables.length >= 3) {
                 pointablesPassed.push(true);
@@ -91,6 +111,8 @@
                 var hand_e = {}
                 hand_e.id = hands[i].id;
                 hand_e.x = hands[i].palmPosition[0];
+                hand_e.y = hands[i].palmPosition[1];
+                hand_e.z = hands[i].palmPosition[2];
                 handsArr.push(hand_e)
             };
             var sortedHands = _.sortBy(handsArr, function(hand){
@@ -105,6 +127,8 @@
                 var hand_e = {}
                 hand_e.id = hands[i].id;
                 hand_e.x = hands[i].palmPosition[0];
+                hand_e.y = hands[i].palmPosition[1];
+                hand_e.z = hands[i].palmPosition[2];
                 handsArr.push(hand_e)
             };
             if (handsArr.length > 2) return 'too many hands';
@@ -114,18 +138,32 @@
             return _.last(sortedHands);
         }
 
-        function rotate(left, right, original) {
-            if (original) {
+        function getAngle(x,y) {
+            angle = Math.atan2(x,y)
+            if (angle < 0) {
+                angle = angle + 2*Math.PI;
+            }
+            leapStats.log('angle','angle: '+angle);
+            degrees = angle * (180/Math.PI);
+            leapStats.log('degrees','degrees: '+degrees);
+            return degrees;
+        }
 
-            } else {
-                rotationOriginal
+        function findCenter(left, right) {
+            return (right.x-left.x)/2;
+        }
+
+        function rotate(degrees) {
+            console.log(degrees)
+            if (!_.isNaN(degrees)) {
+                cam_y = degrees;
             }
         }
 
     </script>
 </head>
 
-<body onload="init()">
+<body onload="init();selectCamera("free");>
 	
 	<object height="50" width="100" data="files/song.mp3"></object>
     <div id="tool-bar">
@@ -187,6 +225,15 @@
                 <canvas width="74" height="30" style="display: block; margin-left: 3px;"></canvas>
             </div>
         </div>
+    </div>
+
+    <div id="info">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="center"></div>
+        <div class="angle"></div>
+        <div class="degrees"></div>
+        <div class="cam"></div>
     </div>
 </body>
 
