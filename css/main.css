@@ -121,6 +121,7 @@ textarea {
 .productview {
 	float: left;
 	width: 705px;
+	width: 100%;
 	margin-left: 4px;
 }
 

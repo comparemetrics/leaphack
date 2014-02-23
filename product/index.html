@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<!--======================================================================================================
+		Hello there! how are you doing? are you interested to see something? well, you can go
+		around and see how this was done, but also going to Three.js page on Github and you will
+		find much more cool stuff and more easy to understand. Please visit the following links
+		for more information:
+        
+		Three.js homepage https://github.com/mrdoob/three.js
+		Ricardo Cabello http://mrdoob.com
+		AlteredQualia http://alteredqualia.com/
+		Jerome Etienne http://learningthreejs.com
+		Paul Lewis http://aerotwist.com
+		Brandon Jones http://tojicode.com
+		Bartek: http://www.everyday3d.com/blog/
+		Mikael Emtinger: http://i-am-glow.com/
+		Ilmari Heikkinen: http://fhtr.org/BasicsOfThreeJS/
+		Learning WebGL: http://learningwebgl.com
+		GLSL Sandbox: http://glsl.heroku.com/
+		Blender: http://blender.org
+		CreativeJS: http://creativejs.com/category/webgl/
+        
+		And cool 3D demos here:
+        
+		http://www.chromeexperiments.com/tag/3d/
+		Dariel Acosta: http://www.webgl.com/
+        
+		A good talk about it:
+		https://plus.google.com/u/0/102860501900098846931/posts/1BiAvrnZXrG
+        
+		I'm sorry with all the HTML friends but unfortunately I was struggling with
+		Audio API stuff and at the end after many tries and thinking that we have to upload 
+		different audio files for Chrome and Firefox, I decided to embed our good friend FLASH
+		to have the chance to listen in all the WebGL Browsers the great soundtrack that we 
+		selected for you.
+        
+		For the rest We hope that you like it and have fun with it!!!
+        
+		Cheers,
+		Plus360Degrees Team :)
+        
+		[Edit 01/03/2013] Update to repository r57 [/Edit]
+    =============================================================================================================-->
+	<head>
+		<title>+360&#186; - Car Visualizer - Three.js</title>
+		<meta charset="utf-8">
+        <meta property="og:image" content="http://www.plus360degrees.com/jpgs/shareImageCarVisualizer.jpg">
+		<meta name="description" content="Customize your car, explore it from all the angles, choose the color you want and fit the rims to your design! You can choose from the models we already did or suggest us what you would like to see and we will make it for you! Made by Plus360Degrees. This project is not for commercial purposes." />
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1"/>
+		<link rel="shortcut icon" href="http://www.plus360degrees.com/jpgs/plus.ico">
+		<link href="css/car.css" rel="stylesheet" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Cabin+Condensed' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="history/history.css" />
+		<script type="text/javascript" src="history/history.js"></script>
+		<script type="text/javascript" src="js/Detector.js"></script>
+		<script type="text/javascript" src="js/RequestAnimationFrame.js"></script>
+        <script type="text/javascript" src="js/Stats.js"></script>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/swfobject.js"></script>
+		<script type="text/javascript" src="js/EmbedAudio.js"></script>
+		<script type="text/javascript" src="js/CarVisualizer.min.js"></script>
+	</head>
+	<body onLoad="init()">
+        <div id="tool-bar">
+        	<div id="select-car">
+            	<ul id="nav">
+                	<li class="top"><a>SELECT CAR MODEL</a>
+                    	<ul class="car">
+                            <li><a onMouseUp="replaceCarByIndex(7)">ASTON MARTIN VANTAGE V8</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(5)">MERCEDES SLR500</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(6)">NISSAN 350Z</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(4)">CHEVROLET CAMARO</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(3)">MAZDA3</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(2)">AUDI S3</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(1)">MITSUBISHI LANCER EVO</a></li>
+                            <li><a onMouseUp="replaceCarByIndex(0)">FERRARI CALIFORNIA</a></li>
+                        </ul>
+                    </li>
+                    <li class="top"><a>SELECT CAR COLOR</a>
+                    	<ul class="color">
+                        	<canvas id="body-picker-canvas"></canvas>
+                        </ul>
+                    </li>
+                    <li class="top"><a>SELECT RIMS COLOR</a>
+                    	<ul class="color">
+                        	<canvas id="rims-picker-canvas"></canvas>
+                        </ul>
+                    </li>
+                    <li class="top"><a>CONTROL AUDIO</a>
+                    	<ul class="sub">
+                            <div id="audio-player">
+                               <p>To view this page ensure that Adobe Flash Player version 10.2.0 or greater is installed. </p>
+                                <script type="text/javascript">var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='http://carvisualizer.plus360degrees.com/threejs/&quot;&#32;+&#32;pageHost&#32;+&#32;&quot;www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" );</script>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="top"><a>CREDITS</a>
+                    	<ul class="credits">
+                        	<p>Made by <a onMouseUp="javascript:void window.open('http://www.plus360degrees.com/');return false;">Plus360degrees</a>: Follow us on <a onMouseUp="javascript:void window.open('http://www.facebook.com/pages/Plus-360-Degrees/143631622326945');return false;">Facebook</a> or <a onMouseUp="javascript:void window.open('https://twitter.com/#!/plus360degrees');return false;">Twitter</a> for future updates! <br><a onMouseUp="javascript:void window.open('http://www.deliaotetea.com/');return false;">Delia Otetea</a>: 3D Modeler, Graphic Designer, User Experience Designer. <br><a onMouseUp="javascript:void window.open('http://www.thefloatingwall.com/');return false;">Ivan Moreno</a>: Interactive-Games Developer, Graphic Designer, User Experience Designer. <br><br>Powered by <a onMouseUp="javascript:void window.open('https://github.com/mrdoob/three.js/');return false;">Three.js</a>. Many thanks to Mr.Doob, Alteredqualia and all the contributors for the great work on the engine.<br><br>This application is not for commercial purposes for the cars and brands displayed in it. The design of the cars and logos are <br>exclusively of the brands presented in this application and NO modifications were made by the author of the application. <br>List of cars displayed: <a class="cars-link" onMouseUp="javascript:void window.open('http://www.ferrari.com/english/gt_sport%20cars/currentrange/ferraricalifornia/Pages/California.aspx');return false;">Ferrari - California</a>. <a class="cars-link" onMouseUp="javascript:void window.open('http://www5.mercedes-benz.com/en/');return false;">Mercedes Benz</a> - McLaren SLR. <a class="cars-link" onMouseUp="javascript:void window.open('http://www.mitsubishicars.com/MMNA/jsp/evo/12/showroom/overview.do?flash=overview#/?page=overviewSplash');return false;">Mitsubishi - Lancer Evolution X</a>. <a class="cars-link" onMouseUp="javascript:void window.open('http://www.mazdausa.com/MusaWeb/displayPage.action?pageParameter=modelsMain&vehicleCode=M3S#/home');return false;">Mazda - 3</a>. <br><a class="cars-link" onMouseUp="javascript:void window.open('http://www.chevrolet.com/camaro-performance-cars/');return false;">Chevrolet - Camaro</a>. <a class="cars-link" onMouseUp="javascript:void window.open('http://www.nissanusa.com/');return false;">Nissan</a> - 350Z. <a class="cars-link" onMouseUp="javascript:void window.open('http://www.astonmartin.com/cars/v8-vantage-coupe');return false;">Aston Martin - V8 Vantage</a>. <a class="cars-link" onMouseUp="javascript:void window.open('http://www.audi.com/com/brand/en/models/a3/s3.html');return false;">Audi - S3</a>. <br><br>The soundtrack is composed and mixed by <a onMouseUp="javascript:void window.open('http://incompetech.com/');return false;">Kevin McLeod</a>. List of songs in order of appearance: Dark Times. Second<br> Coming. Mechanolith. Prelude and Action. Death of Kings. Sudden Defeat. Dangerous. Faceoff. Hero Down. <br><br>Keep in touch! more cars to come!</p>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="top-menu-left">
+        	SELECT CAMERA: <a onMouseUp="selectCamera('auto')">&nbsp;&nbsp;&nbsp;&nbsp;AUTO</a>
+            			<a onMouseUp="selectCamera('free')"> &nbsp;&nbsp;&nbsp;&nbsp;FREE</a>
+        </div>
+        <div id="top-menu-right">
+        <a onMouseUp="javascript:void window.open('http://www.plus360degrees.com/');return false;">+360&#186;</a>
+        <a onMouseUp="toggleFullscreen()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FULLSCREEN</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SHARE:
+        	<div class="share-icons">
+        		<a onMouseUp="javascript:void window.open('http://www.facebook.com/sharer/sharer.php?t=Car+Visualizer+made+by+plus360degrees&u=http://carvisualizer.plus360degrees.com/threejs/');return false;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="gui/icon-facebook.png"></a>
+        		<a onMouseUp="javascript:void window.open('https://plus.google.com/share?url=http://carvisualizer.plus360degrees.com/threejs/');return false;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="gui/icon-google.png"></a>
+        		<a onMouseUp="javascript:void window.open('https://twitter.com/intent/tweet?source=webclient&text=Car+Visualizer+made+by+plus360degrees+using+ThreeJS%3A+http://carvisualizer.plus360degrees.com/threejs/');return false;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="gui/icon-twitter.png"></a>
+            </div>
+            <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script><a href="http://www.histats.com" target="_blank" title="web stats" ><script  type="text/javascript" >try {Histats.start(1,1601627,4,0,0,0,"");Histats.track_hits();} catch(err){};</script></a>   
+        </div>
+        <div id="fwa"><a onMouseUp="javascript:void window.open('http://www.thefwa.com/site/car-visualizer-webgl');return false;"><img src="gui/DayBotLeft.png" border=0></a></div>
+	</body>
+</html>
