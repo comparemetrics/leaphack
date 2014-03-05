@@ -1,8 +1,20 @@
 <html>
+
 <head>
-<meta http-equiv="refresh" content="0; URL=grid/index.html">
+    <script src="//js.leapmotion.com/leap-0.4.1.min.js"></script>
+    <script src="/lib/Ascend.js" type="text/javascript" charset="utf-8" async defer></script>
 </head>
+
 <body>
 </body>
-</html>
+<script>
+setTimeout(function(){
+	console.log(Ascend);
 
+	Ascend().bind('circle', function() {
+	    console.log('circle fired');
+	})
+},1000);
+</script>
+
+</html>
