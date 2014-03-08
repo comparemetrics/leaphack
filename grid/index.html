@@ -1,54 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<title>gridwall</title>
-		<meta content="text/html; charset=utf-8" http-equiv="content-type">
-		<meta name="description" content="Freewall demo filter" />
-		<meta name="keywords" content="javascript, dynamic, grid, layout, jquery plugin, fit zone"/>
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="freewall.js"></script>
 		<script src="leap.min.js"></script>
-                <script src="app.js"></script>
-<script src="leapcursor-with-dependencies.min.js?color=purple"></script>
-<script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js"></script>
-<link rel="stylesheet" href="fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
-		<style type="text/css">
-			html, body {
-				margin: 0;
-				padding: 0;
-				background-color: black;
-			}
-			
-			.layout {
-				padding: 15px;
-				width: 100%;
-			}
-			
-			.free-wall {
-			}
-			
-			.filter-items {
-				padding: 10px 0px;
-				width: 75%;
-			    margin: 0 auto;
-			}
-
-			.filter-label {
-				display: inline-block;
-				margin: 0px 5px 5px 0px;
-				padding: 10px;
-				height: 200px;
-				cursor: crosshair;
-				background: rgb(205, 149, 12);
-			}
-
-			.filter-label.active,
-			.filter-label:hover {
-				background: rgb(238, 180, 34);
-			}
-
-		</style>
+		<script src="leapcursor-with-dependencies.min.js?color=purple"></script>
 	</head>
 	<body class="leap-interactive" leap-disable-tap="true">
 		<div class="layout">
@@ -61,54 +15,5 @@
 			<div id="freewall" class="free-wall"></div>
 		</div>
 
-		<script type="text/javascript">
-			var temp = "<div class='brick {size}' style='background-color:black;border-style:solid;border-color:{color};'><div class='cover'><a href='../cars/'><img class='productimage' src='../img/{prod}.png' height='60%' width='50%' alt='{size}' /></a><a href='../cars/'>3d view</a></div></div>";
-			var sizes = ["size21", "size22", "size31", "size23"];
-			var prods = ["product1", "product2", "product3", "product4", "product6", "product7", "product8"];
-			var colour = [
-				"rgb(142, 68, 173)",
-				"rgb(211, 84, 0)",
-				"rgb(0, 106, 63)",
-				"rgb(135, 0, 0)",
-				"rgb(39, 174, 96)",
-				"rgb(192, 57, 43)",
-				"rgb(41, 128, 185)",
-				"rgb(243, 156, 18)"
-			];
-			var html = '', size = '', color = '', limitItem = 100;
-			for (var i = 0; i < limitItem; ++i) {
-				size = sizes[sizes.length * Math.random() << 0];
-				prod = prods[prods.length * Math.random() << 0];
-				color = colour[colour.length * Math.random() << 0];
-				html += temp.replace(/\{size\}/g, size).replace("{color}", color).replace(/\{prod\}/g, prod);
-			}
-			$("#freewall").html(html);
-			
-			$(function() {
-				var wall = new freewall("#freewall");
-				wall.reset({
-					selector: '.brick',
-					animate: true,
-					cellW: 160,
-					cellH: 160,
-					fixSize: 0,
-					onResize: function() {
-						wall.refresh();
-					}
-				});
-				wall.filter(".size23");
-				$(".filter-label").click(function() {
-					$(".filter-label").removeClass("active");
-					var filter = $(this).addClass('active').data('filter');
-					if (filter) {
-						wall.filter(filter);
-					} else {
-						wall.unFilter();
-					}
-				});
-
-				wall.fitWidth();
-			});
-		</script>
-	</body>
+		</body>
 </html>

@@ -1,22 +1,20 @@
 <html>
 
 <head>
-	<script src="//js.leapmotion.com/leap-0.4.1.min.js"></script>
+	<script src="/js/leap-0.4.1.min.js"></script>
 	<script src="/lib/Ascend.js" type="text/javascript" charset="utf-8" async defer></script>
 	<script src="/js/jquery-1.10.2.min.js"></script>
 	<script src="/js/jquery.colorbox.min.js"></script>
+	<script src="/js/leapcursor-with-dependencies.min.js?color=black&left=0"></script>
 	<script>
 		jQuery(document).ready(function () {
-			jQuery('.colorbox').colorbox({iframe:true,  innerWidth:960, innerHeight:600, opacity:0.5});
+			jQuery('.colorbox').colorbox({fixed:true, overlayClose:false, iframe:true,  innerWidth:960, innerHeight:600, opacity:0.5});
 
 			setTimeout(function(){
-				Ascend().bind('circle', function() {
-				})
-				Ascend().bind('pitchUp', function() {
-					pageScroll(0,-10)
-				})
-				Ascend().bind('pitchDown', function() {
-					pageScroll(0,10)
+				ascend = new Ascend();
+				ascend.bind('circleLeft', function() {
+					console.log('left circle')
+					jQuery.colorbox.close();
 				})
 			},1000);
 		});
@@ -36,23 +34,30 @@
 	<section id="header" class="clearfix">
 		<div class="left"><img src="/images/logo.png" /></div>
 		<div class="right">
-			<div>Menu</div>
-			<div>Search</div>
+			<div>Home | Cars | Loans | Contact Us</div>
+			<br />
+			<div><input type="search" name="sitesearch"><button>Search</button></div>
 		</div>
 	</section>
 	<section id="content">
 		<div class="row clearfix">
-			<div class="product">
+			<div class="product leap-interactive">
 				<a href="/cars/index.html" class="iframe colorbox" action="replaceCarByIndex(6)"><span class="link"></span></a>
-				<div class="title"></div>
+				<div class="title">Aston Martin</div>
 				<div class="productimage">
 				<img src="/img/product1.png" /></div>
 				<div class="price special clearfix"><span class="special">$99,999</span></div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Yellow</div>
+					<div class="label">Model: </div><div class="value">Vantage</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$99,999</div>
 				</div>
 			</div>
-			<div class="product">
+			<div class="product leap-interactive">
 				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
 				<div class="title"></div>
 				<div class="productimage">
@@ -62,7 +67,7 @@
 					<div class="label">Color: </div><div class="value">Red</div>
 				</div>
 			</div>
-			<div class="product">
+			<div class="product leap-interactive">
 				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
 				<div class="title"></div>
 				<div class="productimage">
@@ -72,7 +77,7 @@
 					<div class="label">Color: </div><div class="value">Red</div>
 				</div>
 			</div>
-			<div class="product">
+			<div class="product leap-interactive">
 				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
 				<div class="title"></div>
 				<div class="productimage">
@@ -85,93 +90,14 @@
 		</div>
 		<div class="row clearfix">
 			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/img/product5.png" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/img/product6.png" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/img/product7.png" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/img/product8.png" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-		</div>
-		<div class="row clearfix">
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/images/cars/car.jpg" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/images/cars/car.jpg" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/images/cars/car.jpg" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-			<div class="product">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
-				<div class="title"></div>
-				<div class="productimage">
-				<img src="/images/cars/car.jpg" /></div>
-				<div class="price special clearfix"><span class="special">$99,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
-				</div>
-			</div>
-		</div>
-		<div class="row clearfix">
-			<div class="product">
-				<div class="title"></div>
+				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
-				<div class="price clearfix">$109,999</div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
@@ -213,24 +139,128 @@
 		</div>
 		<div class="row clearfix">
 			<div class="product">
-				<div class="title"></div>
+				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
-				<div class="price clearfix">$109,999</div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
 			</div>
 			<div class="product">
-				<div class="title"></div>
+				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
-				<div class="price clearfix">$109,999</div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
 			</div>
 			<div class="product">
-				<div class="title"></div>
+				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
-				<div class="price clearfix">$109,999</div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
 			</div>
 			<div class="product">
-				<div class="title"></div>
+				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
-				<div class="price clearfix">$109,999</div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price: </div><div class="value">$109,999</div>
+				</div>
 			</div>
 		</div>
 

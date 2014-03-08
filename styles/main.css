@@ -19,9 +19,12 @@ section#header {
 }
 section#header .left {
     float: left;
+    padding-left: 10px;
 }
 section#header .right {
     float: right;
+    text-align: right;
+    padding-right: 20px;
 }
 div.row {
     background: #cccccc;
@@ -36,8 +39,8 @@ div.row .product {
     float: left;
     background: #ffffff;
     position: relative;
-    max-width: 203px;
-    width: 203px;
+    max-width: 205px;
+    width: 205px;
     margin: 0px 5px;
     padding: 5px;
     -webkit-border-radius: 5px;
@@ -55,6 +58,7 @@ div.row .product a .link {
 }
 div.row .product .title {
     text-align: center;
+    font-size: 24px;
 }
 div.row .product .productimage {
 	background-color: black;
@@ -80,7 +84,7 @@ div.row .product .price .special {
     position: absolute;
     width: 50px;
     height: 50px;
-    top: 90;
+    top: 115;
     left: 166;
     z-index: 3;
     background-image: url('../images/special.png');
@@ -90,12 +94,12 @@ div.row .product .attribute {
 }
 div.row .product .attribute .label {
     float: left;
-    font-size: 24px;
+    font-size: 18px;
 }
 div.row .product .attribute .value {
     float: right;
     text-align: right;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 /* Tricks */

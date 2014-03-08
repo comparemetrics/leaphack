@@ -21,8 +21,8 @@ $(document).ready(function() {
 	});
 	
 });
-        LeapManager.init({
-            maxCursors:2,
-            enableTouchScrolling: false,
-            enableScrollbarScrolling: true,
-        });
+        // LeapManager.init({
+        //     maxCursors:2,
+        //     enableTouchScrolling: false,
+        //     enableScrollbarScrolling: true,
+        // });
