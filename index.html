@@ -1,68 +1,84 @@
 <html>
 
 <head>
-    <script src="//js.leapmotion.com/leap-0.4.1.min.js"></script>
-    <script src="/lib/Ascend.js" type="text/javascript" charset="utf-8" async defer></script>
-	<link rel="stylesheet" href="styles/main.css" type="text/css" media="screen" />
+	<script src="//js.leapmotion.com/leap-0.4.1.min.js"></script>
+	<script src="/lib/Ascend.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="/js/jquery-1.10.2.min.js"></script>
+	<script src="/js/jquery.colorbox.min.js"></script>
+	<script>
+		jQuery(document).ready(function () {
+			jQuery('.colorbox').colorbox({iframe:true,  innerWidth:960, innerHeight:600, opacity:0.5});
+
+			setTimeout(function(){
+				Ascend().bind('circle', function() {
+					console.log('circle fired');
+				})
+			},1000);
+		});
+	</script>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="styles/colorbox.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="styles/main.css"/>
 </head>
 
 <body>
-	<section id="header"></section>
+	<section id="header" class="clearfix">
+		<div class="left">LOGO</div>
+		<div class="right">
+			<div>Menu</div>
+			<div>Search</div>
+		</div>
+	</section>
 	<section id="content">
 		<div class="row clearfix">
 			<div class="product">
-				<a href="www.google.com"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car01.jpg" />
+				<div class="price special clearfix"><span class="special">$99,999</span></div>
+				<div class="attribute clearfix">
+					<div class="label">Color: </div><div class="value">Red</div>
+				</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 		</div>
 		<div class="row clearfix">
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 			<div class="product">
 				<div class="title"></div>
-				<img src="car.jpg" />
-				<div class="price clearfix">$99,999</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
 			</div>
 		</div>
 	</section>
 	<section id="footer"></section>
 </body>
-<script>
-setTimeout(function(){
-	Ascend().bind('circle', function() {
-	    console.log('circle fired');
-	})
-},1000);
-</script>
-
 </html>

@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="http://www.plus360degrees.com/jpgs/plus.ico">
     <link href="./files/car.css" rel="stylesheet" type="text/css">
-    <link href="./files/css" rel="stylesheet" type="text/css">
     <style>
         #info {
             background-color: rgba(0,0,0,0.6);
@@ -34,10 +33,8 @@
 
         reset = {
             all: function() {
-                rotationOriginal = null;
             },
             fists: function() {
-                rotationOriginal = null;
             }
         };
 
@@ -46,30 +43,24 @@
                 $('#info .'+area).text(msg);
             }
         }
-        var rotationOriginal;
-        var offset = 269.9;
+        var rotationOriginal = 225;
         var controller = new Leap.Controller({enableGestures: true});
         controller.on('frame', function(currentFrame){
-            if (currentFrame.id%20 === 0) {
+            if (currentFrame.id%1 === 0) {
                 if (currentFrame.hands.length > 1 && !hasFingers(currentFrame)) {
                     leftHand = getLeftHand(currentFrame.hands);
                     rightHand = getRightHand(currentFrame.hands);
-                    angleStart = cam_y;
-                    angle = getAngle(rightHand.x,rightHand.z);
-                    if (_.isUndefined(rotationOriginal)) {
-                        rotationOriginal = getLeftHand(currentFrame.hands);
-                    }
-
+                    angle = getAngle(rightHand.x*1000,rightHand.z*1000);
 
                     leapStats.log('center', 'center: '+findCenter(leftHand, rightHand));
                     leapStats.log('left','id: '+leftHand.id+' x:'+leftHand.x+' y:'+leftHand.y+' z:'+leftHand.z);
                     leapStats.log('right','id: '+rightHand.id+' x:'+rightHand.x+' y:'+rightHand.y+' z:'+leftHand.z);
                     leapStats.log('cam','cam: '+cam_y);
-                    
+
                     rotate(angle);
                 }
                 if (currentFrame.hands.length = 2 && hasFingers(currentFrame)) {
-                    offset = cam_y;
+                    cam_y = rotationOriginal;
                 }
                 if (currentFrame.hands.length >= 1 && hasFingers(currentFrame)) {
                     reset.fists();
@@ -139,14 +130,18 @@
         }
 
         function getAngle(x,y) {
-            angle = Math.atan2(x,y)
-            if (angle < 0) {
-                angle = angle + 2*Math.PI;
+            if (x >= 0) {
+                angle = Math.atan2(x,y)
+                degrees = angle * (180/Math.PI);
+                console.log(degrees);
+                console.log(degrees - rotationOriginal);
+                degrees = degrees - rotationOriginal;
+                leapStats.log('angle','angle: '+angle);
+                leapStats.log('degrees','degrees: '+degrees); 
+                return degrees;
+            } else {
+                return (y < 0)?(540 - rotationOriginal):(360 - rotationOriginal);
             }
-            leapStats.log('angle','angle: '+angle);
-            degrees = angle * (180/Math.PI);
-            leapStats.log('degrees','degrees: '+degrees);
-            return degrees;
         }
 
         function findCenter(left, right) {
@@ -154,7 +149,6 @@
         }
 
         function rotate(degrees) {
-            console.log(degrees)
             if (!_.isNaN(degrees)) {
                 cam_y = degrees;
             }
@@ -163,9 +157,11 @@
     </script>
 </head>
 
-<body onload='init();selectCamera("free");'>
-	
-	<object height="50" width="100" data="files/song.mp3"></object>
+<body onload='init();selectCamera("free");cam_y=rotationOriginal;'>
+    <audio autoplay loop>
+        <source src="files/song.mp3" type="audio/mpeg">
+        <embed height="50" width="100" src="files/song.mp3">
+    </audio>
     <div id="tool-bar">
         <div id="select-car">
             <ul id="nav">
