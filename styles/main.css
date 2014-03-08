@@ -61,8 +61,15 @@ div.row .product .title {
     font-size: 24px;
 }
 div.row .product .productimage {
-	background-color: black;
-	height: 165px;
+	/*background-color: black;*/
+	background: #45484d; /* Old browsers */
+	background: -moz-linear-gradient(top,  #45484d 40%, #000000 86%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(40%,#45484d), color-stop(86%,#000000)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #45484d 40%,#000000 86%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #45484d 40%,#000000 86%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #45484d 40%,#000000 86%); /* IE10+ */
+	background: linear-gradient(to bottom,  #45484d 40%,#000000 86%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
 div.row .product img {
     text-align: center;
