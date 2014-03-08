@@ -56,6 +56,10 @@ div.row .product a .link {
 div.row .product .title {
     text-align: center;
 }
+div.row .product .productimage {
+	background-color: black;
+	height: 165px;
+}
 div.row .product img {
     text-align: center;
     max-width: 203px;
