@@ -11,10 +11,21 @@
 
 			setTimeout(function(){
 				Ascend().bind('circle', function() {
-					console.log('circle fired');
+				})
+				Ascend().bind('pitchUp', function() {
+					pageScroll(0,-10)
+				})
+				Ascend().bind('pitchDown', function() {
+					pageScroll(0,10)
 				})
 			},1000);
 		});
+
+		function pageScroll(x,y) {
+			var x = x || 0;
+			var y = y || 0; 
+			window.scrollBy(x,y);
+		}
 	</script>
 
 	<link rel="stylesheet" type="text/css" media="screen" href="styles/colorbox.css"/>
@@ -23,7 +34,7 @@
 
 <body>
 	<section id="header" class="clearfix">
-		<div class="left">LOGO</div>
+		<div class="left"><img src="/images/logo.png" /></div>
 		<div class="right">
 			<div>Menu</div>
 			<div>Search</div>
@@ -78,6 +89,95 @@
 				<div class="price clearfix">$109,999</div>
 			</div>
 		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+			<div class="product">
+				<div class="title"></div>
+				<img src="/images/cars/car.jpg" />
+				<div class="price clearfix">$109,999</div>
+			</div>
+		</div>
+
 	</section>
 	<section id="footer"></section>
 </body>
