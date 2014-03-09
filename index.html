@@ -6,6 +6,67 @@
 	<script src="/js/jquery-1.10.2.min.js"></script>
 	<script src="/js/jquery.colorbox.min.js"></script>
 	<script src="/js/leapcursor-with-dependencies.min.js?color=black&left=0"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!-- <link rel="stylesheet" href="https://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
+-->
+<script>
+function doMyOwnStuff()
+{
+ $( "#lmconnect" ).dialog({
+	  option: {
+	    position: ['200','200']
+	  },
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+});
+}
+
+  $(function() {
+    $( "#lmenabled" ).dialog({
+	  option: {
+	    position: ['200','200']
+	  },
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+    $( "#lmconnect" ).hide();
+    $( "#lmdisconnect" ).hide();
+
+  });
+
+var controller = new Leap.Controller();
+
+controller.on('deviceConnected', function() {
+  console.log("A Leap device has been connected.");
+  doMyOwnStuff();
+});
+
+controller.on('deviceDisconnected', function() {
+  console.log("A Leap device has been disconnected.");
+ $( "#lmdisconnect" ).show();
+ $( "#lmdisconnect" ).dialog({	  option: {
+	    position: ['200','200']
+	  },
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+});
+});
+
+//should probably fire a 'deviceConnected'
+controller.connect();
+
+</script>
+
 	<script>
 		jQuery(document).ready(function () {
 			jQuery('.colorbox').colorbox({fixed:true, overlayClose:false, iframe:true,  innerWidth:960, innerHeight:600, opacity:0.5});
@@ -322,6 +383,16 @@
 		</div>
 
 	</section>
-	<section id="footer"></section>
+	<section id="footer">
+<div id="lmenabled" title="Leap Enabled">This website is Leap Motion enabled, if your device is working properly the icon in the bottom right will be green. Please plugin your device now if not already connected.</div>
+<div id="lmdisconnect" title="Leap Disabled">The Leap Motion device has been disconnected.</div>
+<div id="lmconnect" title="Leap Training">
+  <p>We have detected a LeapMotion capable device installed.</p>
+  <p>You can control this page by moving your hands in the following ways.</p>
+  <img src="img/hands_close.gif"></img>
+  <img src="img/hands_open.gif"></img>
+  <img src="img/hands_rotate.gif"></img>
+</div>
+</section>
 </body>
 </html>
