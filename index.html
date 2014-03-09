@@ -6,228 +6,304 @@
 	<script src="/js/jquery-1.10.2.min.js"></script>
 	<script src="/js/jquery.colorbox.min.js"></script>
 	<script src="/js/leapcursor-with-dependencies.min.js?color=black&left=0"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script>
-function doMyOwnStuff()
-{
- $( "#lmconnect" ).dialog({
-	  option: {
-	    position: ['200','200']
-	  },
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-});
-}
+	<script src="/js/jquery-ui.js"></script>
+	<script>
+		function doMyOwnStuff() {
+			$("#lmconnect").dialog({
+				option: {
+					position: ['200', '200']
+				},
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+		}
 
-  $(function() {
-    $( "#lmenabled" ).dialog({
-	  option: {
-	    position: ['200','200']
-	  },
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-    $( "#lmconnect" ).hide();
-    $( "#lmdisconnect" ).hide();
+		$(function() {
+			$("#lmenabled").dialog({
+				option: {
+					position: ['200', '200']
+				},
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+			$("#lmconnect").hide();
+			$("#lmdisconnect").hide();
 
-  });
+		});
 
-var controller = new Leap.Controller();
+		var controller = new Leap.Controller();
 
-controller.on('deviceConnected', function() {
-  console.log("A Leap device has been connected.");
-  doMyOwnStuff();
-});
+		controller.on('deviceConnected', function() {
+			console.log("A Leap device has been connected.");
+			doMyOwnStuff();
+		});
 
-controller.on('deviceDisconnected', function() {
-  console.log("A Leap device has been disconnected.");
- $( "#lmdisconnect" ).show();
- $( "#lmdisconnect" ).dialog({	  option: {
-	    position: ['200','200']
-	  },
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-});
-});
+		controller.on('deviceDisconnected', function() {
+			console.log("A Leap device has been disconnected.");
+			$("#lmdisconnect").show();
+			$("#lmdisconnect").dialog({
+				option: {
+					position: ['200', '200']
+				},
+				buttons: {
+					Ok: function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+		});
 
-//should probably fire a 'deviceConnected'
-controller.connect();
-
-</script>
+		//should probably fire a 'deviceConnected'
+		controller.connect();
+	</script>
 
 	<script>
-		jQuery(document).ready(function () {
-			jQuery('.colorbox').colorbox({fixed:true, overlayClose:false, iframe:true,  innerWidth:960, innerHeight:600, opacity:0.5});
+		jQuery(document).ready(function() {
+			jQuery('.colorbox').colorbox({
+				fixed: true,
+				overlayClose: false,
+				iframe: true,
+				innerWidth: 960,
+				innerHeight: 600,
+				opacity: 0.5
+			});
 
-			setTimeout(function(){
+			setTimeout(function() {
 				ascend = new Ascend();
 				ascend.bind('circleLeft', function() {
 					console.log('left circle')
 					jQuery.colorbox.close();
 				})
-			},1000);
+			}, 1000);
 		});
 
-		function pageScroll(x,y) {
+		function pageScroll(x, y) {
 			var x = x || 0;
-			var y = y || 0; 
-			window.scrollBy(x,y);
+			var y = y || 0;
+			window.scrollBy(x, y);
 		}
 	</script>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="styles/colorbox.css"/>
-	<link rel="stylesheet" type="text/css" media="screen" href="styles/main.css"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="styles/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="styles/colorbox.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
 </head>
 
 <body>
 	<section id="header" class="clearfix">
-		<div class="left"><img src="/images/logo.png" /></div>
+		<div class="left">
+			<img src="/images/logo.png" />
+		</div>
 		<div class="right">
 			<div>Home | Cars | Loans | Contact Us</div>
 			<br />
-			<div><input type="search" name="sitesearch"><button>Search</button></div>
+			<div>
+				<input type="search" name="sitesearch">
+				<button>Search</button>
+			</div>
 		</div>
 	</section>
 	<section id="content">
 		<div class="row clearfix">
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Nissan</div>
 				<div class="productimage">
-				<img src="/img/product1.png" /></div>
-				<div class="price special clearfix"><span class="special">$18,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">350Z</div>
+					<img src="/img/product1.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$18,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Yellow</div>
+					<div class="label">Model:</div>
+					<div class="value">350Z</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$18,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Yellow</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$18,999</div>
 				</div>
 			</div>
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Audi</div>
 				<div class="productimage">
-				<img src="/img/product2.png" /></div>
-				<div class="price special clearfix"><span class="special">$43,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">S3</div>
+					<img src="/img/product2.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$43,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Model:</div>
+					<div class="value">S3</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$43,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$43,999</div>
 				</div>
 			</div>
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Ferrari</div>
 				<div class="productimage">
-				<img src="/img/product3.png" /></div>
-				<div class="price special clearfix"><span class="special">198,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">California</div>
+					<img src="/img/product3.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">198,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Model:</div>
+					<div class="value">California</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$198,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$198,999</div>
 				</div>
 			</div>
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Mazda</div>
 				<div class="productimage">
-				<img src="/img/product4.png" /></div>
-				<div class="price special clearfix"><span class="special">$17,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">3 Series</div>
+					<img src="/img/product4.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$17,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
+					<div class="label">Model:</div>
+					<div class="value">3 Series</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$17,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Blue</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$17,999</div>
 				</div>
 			</div>
 		</div>
 		<div class="row clearfix">
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Mercedes</div>
 				<div class="productimage">
-				<img src="/img/product5.png" /></div>
-				<div class="price special clearfix"><span class="special">$105,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">SLR 500</div>
+					<img src="/img/product5.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$105,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Model:</div>
+					<div class="value">SLR 500</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$105,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$105,999</div>
 				</div>
 			</div>
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Mitsubishi</div>
 				<div class="productimage">
-				<img src="/img/product6.png" /></div>
-				<div class="price special clearfix"><span class="special">$34,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">Lancer EVO X</div>
+					<img src="/img/product6.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$34,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Blue</div>
+					<div class="label">Model:</div>
+					<div class="value">Lancer EVO X</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$34,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Blue</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$34,999</div>
 				</div>
 			</div>
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Ashton Martin</div>
 				<div class="productimage">
-				<img src="/img/product7.png" /></div>
-				<div class="price special clearfix"><span class="special">$149,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">Vantage V8</div>
+					<img src="/img/product7.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$149,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Model:</div>
+					<div class="value">Vantage V8</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$149,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$149,999</div>
 				</div>
 			</div>
 			<div class="product leap-interactive">
-				<a href="/cars/index.html" class="iframe colorbox"><span class="link"></span></a>
+				<a href="/cars/index.html" class="iframe colorbox">
+					<span class="link"></span>
+				</a>
 				<div class="title">Chevrolet</div>
 				<div class="productimage">
-				<img src="/img/product8.png" /></div>
-				<div class="price special clearfix"><span class="special">$24,999</span></div>
-				<div class="attribute clearfix">
-					<div class="label">Model: </div><div class="value">Camaro</div>
+					<img src="/img/product8.png" />
+				</div>
+				<div class="price special clearfix">
+					<span class="special">$24,999</span>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Yellow</div>
+					<div class="label">Model:</div>
+					<div class="value">Camaro</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$24,999</div>
+					<div class="label">Color:</div>
+					<div class="value">Yellow</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$24,999</div>
 				</div>
 			</div>
 		</div>
@@ -258,82 +334,48 @@ controller.connect();
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="title">Aston Martin</div>
-				<img src="/images/cars/car.jpg" />
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
-				</div>
-				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 			<div class="product">
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="title">Aston Martin</div>
-				<img src="/images/cars/car.jpg" />
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
-				</div>
-				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
-				</div>
-			</div>
-		</div>
-		<div class="row clearfix">
-			<div class="product">
-				<div class="title">Aston Martin</div>
-				<img src="/images/cars/car.jpg" />
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
-				</div>
-				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 			<div class="product">
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="title">Aston Martin</div>
-				<img src="/images/cars/car.jpg" />
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
-				</div>
-				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 			<div class="product">
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 		</div>
@@ -342,55 +384,114 @@ controller.connect();
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="title">Aston Martin</div>
-				<img src="/images/cars/car.jpg" />
-				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
-				</div>
-				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 			<div class="product">
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 			<div class="product">
 				<div class="title">Aston Martin</div>
 				<img src="/images/cars/car.jpg" />
 				<div class="attribute clearfix">
-					<div class="label">Color: </div><div class="value">Red</div>
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
 				</div>
 				<div class="attribute clearfix">
-					<div class="label">Price: </div><div class="value">$109,999</div>
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
+				</div>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="title">Aston Martin</div>
+				<img src="/images/cars/car.jpg" />
+				<div class="attribute clearfix">
+					<div class="label">Color:</div>
+					<div class="value">Red</div>
+				</div>
+				<div class="attribute clearfix">
+					<div class="label">Price:</div>
+					<div class="value">$109,999</div>
 				</div>
 			</div>
 		</div>
 
 	</section>
 	<section id="footer">
-<div id="lmenabled" title="Leap Enabled">This website is Leap Motion enabled, if your device is working properly the icon in the bottom right will be green. Please plugin your device now if not already connected.</div>
-<div id="lmdisconnect" title="Leap Disabled">The Leap Motion device has been disconnected.</div>
-<div id="lmconnect" title="Leap Training">
-  <p>We have detected a LeapMotion capable device installed.</p>
-  <p>You can control this page by moving your hands in the following ways.</p>
-  <img src="img/hands_close.gif"></img>
-  <img src="img/hands_open.gif"></img>
-  <img src="img/hands_rotate.gif"></img>
-</div>
-</section>
+		<div id="lmenabled" title="Leap Enabled">This website is Leap Motion enabled, if your device is working properly the icon in the bottom right will be green. Please plugin your device now if not already connected.</div>
+		<div id="lmdisconnect" title="Leap Disabled">The Leap Motion device has been disconnected.</div>
+		<div id="lmconnect" title="Leap Training">
+			<p>We have detected a LeapMotion capable device installed.</p>
+			<p>You can control this page by moving your hands in the following ways.</p>
+			<img src="img/hands_close.gif"></img>
+			<img src="img/hands_open.gif"></img>
+			<img src="img/hands_rotate.gif"></img>
+		</div>
+	</section>
 </body>
+
 </html>
